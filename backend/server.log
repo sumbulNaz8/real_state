@@ -1,0 +1,23 @@
+SUCCESS: DATABASE CONNECTED SUCCESSFULLY
+ERROR: TABLE CHECK FAILED: Inspection on an AsyncConnection is currently not supported. Please use ``run_sync`` to pass a callable where it's possible to call ``inspect`` on the passed connection. (Background on this error at: https://sqlalche.me/e/20/xd3s)
+INFO:     127.0.0.1:50836 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50870 - "GET / HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:50870 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50870 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51284 - "OPTIONS /api/v1/auth/login HTTP/1.1" 200 OK
+Bcrypt verification error: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+INFO:     127.0.0.1:51284 - "POST /api/v1/auth/login HTTP/1.1" 401 Unauthorized
+Bcrypt verification error: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+INFO:     127.0.0.1:51315 - "POST /api/v1/auth/login HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51331 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51331 - "GET /openapi.json HTTP/1.1" 200 OK
+Bcrypt verification error: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+INFO:     127.0.0.1:51345 - "POST /api/v1/auth/login HTTP/1.1" 401 Unauthorized
+Bcrypt verification error: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+INFO:     127.0.0.1:51364 - "POST /api/v1/auth/login HTTP/1.1" 401 Unauthorized
+Bcrypt verification error: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+INFO:     127.0.0.1:51382 - "POST /api/v1/auth/login HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51415 - "GET /api/v1/auth/login HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:51415 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+Bcrypt verification error: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+INFO:     127.0.0.1:51407 - "POST /api/v1/auth/login HTTP/1.1" 401 Unauthorized

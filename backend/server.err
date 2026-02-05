@@ -1,0 +1,155 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\AG Computer\\Desktop\\real_state\\backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [17376] using WatchFiles
+2026-02-04 23:41:38,853 - kings_builder - INFO - CORS Origins configured: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:3005', 'http://127.0.0.1:3005', '*']
+2026-02-04 23:41:38,859 - kings_builder - INFO - Registering authentication routes...
+2026-02-04 23:41:38,865 - kings_builder - INFO - Auth router registered at /api/v1/auth
+2026-02-04 23:41:39,116 - kings_builder - INFO - Registered routes:
+2026-02-04 23:41:39,118 - kings_builder - INFO -   {'HEAD', 'GET'} /openapi.json
+2026-02-04 23:41:39,120 - kings_builder - INFO -   {'HEAD', 'GET'} /docs
+2026-02-04 23:41:39,121 - kings_builder - INFO -   {'HEAD', 'GET'} /docs/oauth2-redirect
+2026-02-04 23:41:39,121 - kings_builder - INFO -   {'HEAD', 'GET'} /redoc
+2026-02-04 23:41:39,122 - kings_builder - INFO -   {'POST'} /api/v1/auth/login
+2026-02-04 23:41:39,123 - kings_builder - INFO -   {'POST'} /api/v1/auth/refresh
+2026-02-04 23:41:39,124 - kings_builder - INFO -   {'POST'} /api/v1/dev-auth/dev-login
+2026-02-04 23:41:39,125 - kings_builder - INFO -   {'GET'} /api/v1/users/
+2026-02-04 23:41:39,125 - kings_builder - INFO -   {'GET'} /api/v1/users/{user_id}
+2026-02-04 23:41:39,126 - kings_builder - INFO -   {'POST'} /api/v1/users/
+2026-02-04 23:41:39,127 - kings_builder - INFO -   {'PUT'} /api/v1/users/{user_id}
+2026-02-04 23:41:39,127 - kings_builder - INFO -   {'DELETE'} /api/v1/users/{user_id}
+2026-02-04 23:41:39,128 - kings_builder - INFO -   {'GET'} /api/v1/builders/
+2026-02-04 23:41:39,128 - kings_builder - INFO -   {'GET'} /api/v1/builders/{builder_id}
+2026-02-04 23:41:39,129 - kings_builder - INFO -   {'POST'} /api/v1/builders/
+2026-02-04 23:41:39,129 - kings_builder - INFO -   {'PUT'} /api/v1/builders/{builder_id}
+2026-02-04 23:41:39,130 - kings_builder - INFO -   {'DELETE'} /api/v1/builders/{builder_id}
+2026-02-04 23:41:39,130 - kings_builder - INFO -   {'GET'} /api/v1/projects/
+2026-02-04 23:41:39,131 - kings_builder - INFO -   {'GET'} /api/v1/projects/{project_id}
+2026-02-04 23:41:39,131 - kings_builder - INFO -   {'POST'} /api/v1/projects/
+2026-02-04 23:41:39,132 - kings_builder - INFO -   {'PUT'} /api/v1/projects/{project_id}
+2026-02-04 23:41:39,132 - kings_builder - INFO -   {'DELETE'} /api/v1/projects/{project_id}
+2026-02-04 23:41:39,133 - kings_builder - INFO -   {'GET'} /api/v1/inventory/
+2026-02-04 23:41:39,133 - kings_builder - INFO -   {'GET'} /api/v1/inventory/{inventory_id}
+2026-02-04 23:41:39,134 - kings_builder - INFO -   {'POST'} /api/v1/inventory/
+2026-02-04 23:41:39,134 - kings_builder - INFO -   {'PUT'} /api/v1/inventory/{inventory_id}
+2026-02-04 23:41:39,134 - kings_builder - INFO -   {'PATCH'} /api/v1/inventory/{inventory_id}/lock
+2026-02-04 23:41:39,135 - kings_builder - INFO -   {'PATCH'} /api/v1/inventory/{inventory_id}/hold
+2026-02-04 23:41:39,135 - kings_builder - INFO -   {'DELETE'} /api/v1/inventory/{inventory_id}
+2026-02-04 23:41:39,136 - kings_builder - INFO -   {'GET'} /api/v1/investors/
+2026-02-04 23:41:39,136 - kings_builder - INFO -   {'GET'} /api/v1/investors/{investor_id}
+2026-02-04 23:41:39,137 - kings_builder - INFO -   {'POST'} /api/v1/investors/
+2026-02-04 23:41:39,137 - kings_builder - INFO -   {'PUT'} /api/v1/investors/{investor_id}
+2026-02-04 23:41:39,138 - kings_builder - INFO -   {'DELETE'} /api/v1/investors/{investor_id}
+2026-02-04 23:41:39,138 - kings_builder - INFO -   {'GET'} /api/v1/bookings/
+2026-02-04 23:41:39,139 - kings_builder - INFO -   {'GET'} /api/v1/bookings/{booking_id}
+2026-02-04 23:41:39,139 - kings_builder - INFO -   {'POST'} /api/v1/bookings/
+2026-02-04 23:41:39,140 - kings_builder - INFO -   {'PUT'} /api/v1/bookings/{booking_id}
+2026-02-04 23:41:39,140 - kings_builder - INFO -   {'PATCH'} /api/v1/bookings/{booking_id}/cancel
+2026-02-04 23:41:39,141 - kings_builder - INFO -   {'DELETE'} /api/v1/bookings/{booking_id}
+2026-02-04 23:41:39,142 - kings_builder - INFO -   {'GET'} /api/v1/customers/
+2026-02-04 23:41:39,142 - kings_builder - INFO -   {'GET'} /api/v1/customers/{customer_id}
+2026-02-04 23:41:39,143 - kings_builder - INFO -   {'POST'} /api/v1/customers/
+2026-02-04 23:41:39,143 - kings_builder - INFO -   {'PUT'} /api/v1/customers/{customer_id}
+2026-02-04 23:41:39,144 - kings_builder - INFO -   {'DELETE'} /api/v1/customers/{customer_id}
+2026-02-04 23:41:39,144 - kings_builder - INFO -   {'GET'} /api/v1/payments/
+2026-02-04 23:41:39,144 - kings_builder - INFO -   {'GET'} /api/v1/payments/{payment_id}
+2026-02-04 23:41:39,145 - kings_builder - INFO -   {'POST'} /api/v1/payments/
+2026-02-04 23:41:39,145 - kings_builder - INFO -   {'PUT'} /api/v1/payments/{payment_id}
+2026-02-04 23:41:39,146 - kings_builder - INFO -   {'DELETE'} /api/v1/payments/{payment_id}
+2026-02-04 23:41:39,146 - kings_builder - INFO -   {'GET'} /api/v1/installments/
+2026-02-04 23:41:39,146 - kings_builder - INFO -   {'GET'} /api/v1/installments/{installment_id}
+2026-02-04 23:41:39,147 - kings_builder - INFO -   {'POST'} /api/v1/installments/
+2026-02-04 23:41:39,147 - kings_builder - INFO -   {'PUT'} /api/v1/installments/{installment_id}
+2026-02-04 23:41:39,148 - kings_builder - INFO -   {'PATCH'} /api/v1/installments/{installment_id}/pay
+2026-02-04 23:41:39,149 - kings_builder - INFO -   {'DELETE'} /api/v1/installments/{installment_id}
+2026-02-04 23:41:39,149 - kings_builder - INFO -   {'GET'} /api/v1/transfers/
+2026-02-04 23:41:39,150 - kings_builder - INFO -   {'GET'} /api/v1/transfers/{transfer_id}
+2026-02-04 23:41:39,150 - kings_builder - INFO -   {'POST'} /api/v1/transfers/
+2026-02-04 23:41:39,151 - kings_builder - INFO -   {'PUT'} /api/v1/transfers/{transfer_id}
+2026-02-04 23:41:39,151 - kings_builder - INFO -   {'PATCH'} /api/v1/transfers/{transfer_id}/approve
+2026-02-04 23:41:39,152 - kings_builder - INFO -   {'PATCH'} /api/v1/transfers/{transfer_id}/complete
+2026-02-04 23:41:39,152 - kings_builder - INFO -   {'DELETE'} /api/v1/transfers/{transfer_id}
+2026-02-04 23:41:39,153 - kings_builder - INFO -   {'GET'} /api/v1/reports/sales-summary
+2026-02-04 23:41:39,153 - kings_builder - INFO -   {'GET'} /api/v1/reports/inventory-status
+2026-02-04 23:41:39,154 - kings_builder - INFO -   {'GET'} /api/v1/reports/customer-ledger
+2026-02-04 23:41:39,154 - kings_builder - INFO -   {'GET'} /api/v1/reports/payment-collection
+INFO:     Started server process [21648]
+INFO:     Waiting for application startup.
+2026-02-04 23:41:39,159 - kings_builder - INFO - Initializing Kings Builder backend...
+2026-02-04 23:41:51,372 - kings_builder - INFO - Checking for master admin user...
+2026-02-04 23:41:55,087 - kings_builder - INFO - Master admin 'scitforte' already exists
+2026-02-04 23:41:55,489 - kings_builder - INFO - Database tables created and super admin initialized
+INFO:     Application startup complete.
+2026-02-04 23:42:55,939 - kings_builder - INFO - REQUEST: GET /docs FROM: 127.0.0.1:50836 USER_AGENT: Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6456
+2026-02-04 23:42:55,941 - kings_builder - INFO - RESPONSE: 200 for GET /docs DURATION: 0.002s
+2026-02-04 23:44:25,398 - kings_builder - INFO - REQUEST: GET / FROM: 127.0.0.1:50870 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+2026-02-04 23:44:25,409 - kings_builder - INFO - RESPONSE: 307 for GET / DURATION: 0.011s
+2026-02-04 23:44:25,434 - kings_builder - INFO - REQUEST: GET /docs FROM: 127.0.0.1:50870 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+2026-02-04 23:44:25,435 - kings_builder - INFO - RESPONSE: 200 for GET /docs DURATION: 0.001s
+2026-02-04 23:44:25,728 - kings_builder - INFO - REQUEST: GET /openapi.json FROM: 127.0.0.1:50870 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+2026-02-04 23:44:26,065 - kings_builder - INFO - RESPONSE: 200 for GET /openapi.json DURATION: 0.337s
+2026-02-05 00:03:41,266 - kings_builder - INFO - REQUEST: POST /api/v1/auth/login FROM: 127.0.0.1:51284 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+(trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\AG Computer\Desktop\real_state\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+C:\Users\AG Computer\Desktop\real_state\backend\core\security.py:44: UserWarning: Using fallback password verification - this is insecure for production!
+  warnings.warn("Using fallback password verification - this is insecure for production!")
+2026-02-05 00:03:49,994 - kings_builder - ERROR - HTTP Exception: 401 - Incorrect username or password
+2026-02-05 00:03:49,996 - kings_builder - INFO - RESPONSE: 401 for POST /api/v1/auth/login DURATION: 8.731s
+2026-02-05 00:04:15,673 - kings_builder - INFO - REQUEST: POST /api/v1/auth/login FROM: 127.0.0.1:51315 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+(trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\AG Computer\Desktop\real_state\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-02-05 00:04:19,758 - kings_builder - ERROR - HTTP Exception: 401 - Incorrect username or password
+2026-02-05 00:04:19,766 - kings_builder - INFO - RESPONSE: 401 for POST /api/v1/auth/login DURATION: 4.092s
+2026-02-05 00:04:26,115 - kings_builder - INFO - REQUEST: GET /docs FROM: 127.0.0.1:51331 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+2026-02-05 00:04:26,119 - kings_builder - INFO - RESPONSE: 200 for GET /docs DURATION: 0.004s
+2026-02-05 00:04:26,525 - kings_builder - INFO - REQUEST: GET /openapi.json FROM: 127.0.0.1:51331 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+2026-02-05 00:04:26,554 - kings_builder - INFO - RESPONSE: 200 for GET /openapi.json DURATION: 0.029s
+2026-02-05 00:04:55,643 - kings_builder - INFO - REQUEST: POST /api/v1/auth/login FROM: 127.0.0.1:51345 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+(trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\AG Computer\Desktop\real_state\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-02-05 00:05:01,366 - kings_builder - ERROR - HTTP Exception: 401 - Incorrect username or password
+2026-02-05 00:05:01,367 - kings_builder - INFO - RESPONSE: 401 for POST /api/v1/auth/login DURATION: 5.724s
+2026-02-05 00:05:19,839 - kings_builder - INFO - REQUEST: POST /api/v1/auth/login FROM: 127.0.0.1:51364 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+(trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\AG Computer\Desktop\real_state\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-02-05 00:05:26,848 - kings_builder - ERROR - HTTP Exception: 401 - Incorrect username or password
+2026-02-05 00:05:26,850 - kings_builder - INFO - RESPONSE: 401 for POST /api/v1/auth/login DURATION: 7.011s
+2026-02-05 00:05:47,133 - kings_builder - INFO - REQUEST: POST /api/v1/auth/login FROM: 127.0.0.1:51382 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+(trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\AG Computer\Desktop\real_state\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-02-05 00:05:54,942 - kings_builder - ERROR - HTTP Exception: 401 - Incorrect username or password
+2026-02-05 00:05:54,950 - kings_builder - INFO - RESPONSE: 401 for POST /api/v1/auth/login DURATION: 7.817s
+2026-02-05 00:06:12,425 - kings_builder - INFO - REQUEST: POST /api/v1/auth/login FROM: 127.0.0.1:51407 USER_AGENT: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Mobile Safari/537.36
+2026-02-05 00:06:15,663 - kings_builder - INFO - REQUEST: GET /api/v1/auth/login FROM: 127.0.0.1:51415 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+2026-02-05 00:06:15,756 - kings_builder - ERROR - HTTP Exception: 405 - Method Not Allowed
+2026-02-05 00:06:15,762 - kings_builder - INFO - RESPONSE: 405 for GET /api/v1/auth/login DURATION: 0.099s
+2026-02-05 00:06:15,902 - kings_builder - INFO - REQUEST: GET /favicon.ico FROM: 127.0.0.1:51415 USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
+2026-02-05 00:06:15,904 - kings_builder - ERROR - HTTP Exception: 404 - Not Found
+2026-02-05 00:06:15,905 - kings_builder - INFO - RESPONSE: 404 for GET /favicon.ico DURATION: 0.003s
+(trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\AG Computer\Desktop\real_state\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-02-05 00:06:17,853 - kings_builder - ERROR - HTTP Exception: 401 - Incorrect username or password
+2026-02-05 00:06:17,861 - kings_builder - INFO - RESPONSE: 401 for POST /api/v1/auth/login DURATION: 5.436s

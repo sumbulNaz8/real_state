@@ -1,0 +1,266 @@
+// Schema for Kings Builder Real Estate Management System
+// Fixed relations to avoid validation errors
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  username           String   @unique
+  email              String   @unique
+  password_hash      String
+  first_name         String
+  last_name          String
+  role               String   // UserRole enum would be handled in the application layer
+  status             String   // active, inactive
+  builder_id         String?
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  builder            Builder? @relation(fields: [builder_id], references: [id])
+  
+  @@map("users")
+}
+
+model Builder {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  name               String
+  contact_person     String
+  email              String
+  phone              String
+  address            String?
+  max_projects       Int      @default(5)
+  current_project_count Int   @default(0)
+  status             String   // active, inactive
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  projects           Project[]
+  users              User[]
+  
+  @@map("builders")
+}
+
+model Project {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  name               String
+  description        String?
+  location           String
+  total_units        Int
+  available_units    Int
+  builder_id         String
+  status             String   // active, inactive, completed
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  builder            Builder  @relation(fields: [builder_id], references: [id])
+  phase_blocks       PhaseBlock[]
+  inventory          Inventory[]
+  
+  @@map("projects")
+}
+
+model PhaseBlock {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  name               String
+  description        String?
+  project_id         String
+  status             String   // active, inactive
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  project            Project  @relation(fields: [project_id], references: [id])
+  inventory          Inventory[]
+  
+  @@map("phase_blocks")
+}
+
+model Inventory {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  unit_number        String
+  property_type      String   // plot, flat, villa, commercial
+  status             String   // available, on_hold, booked, sold
+  price              Float
+  area_size          String?
+  project_id         String
+  phase_block_id     String?
+  investor_locked    Boolean  @default(false)
+  hold_expiry        DateTime?
+  booking_id         String?  // Each inventory can have at most one booking
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  project            Project      @relation(fields: [project_id], references: [id])
+  phase_block        PhaseBlock?  @relation(fields: [phase_block_id], references: [id])
+  booking            Booking?
+  investor_assignments InvestorInventoryAssignment[]
+  
+  @@map("inventory")
+}
+
+model Investor {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  name               String
+  email              String
+  phone              String
+  cnic               String?
+  address            String?
+  status             String   // active, inactive
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  investor_assignments InvestorInventoryAssignment[]
+  
+  @@map("investors")
+}
+
+model InvestorInventoryAssignment {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  investor_id        String
+  inventory_id       String
+  consent_given      Boolean  @default(false)
+  assigned_at        DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  investor           Investor   @relation(fields: [investor_id], references: [id])
+  inventory          Inventory  @relation(fields: [inventory_id], references: [id])
+  
+  @@map("investor_inventory_assignments")
+}
+
+model Customer {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  name               String
+  email              String
+  phone              String
+  cnic               String?
+  address            String?
+  status             String   // active, inactive
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+
+  // Relations
+  bookings           Booking[]
+  transfers_as_from  Transfer[] @relation(name: "FromCustomer")
+  transfers_as_to    Transfer[] @relation(name: "ToCustomer")
+
+  @@map("customers")
+}
+
+model Booking {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  booking_number     String   @unique
+  customer_id        String
+  inventory_id       String   @unique // Each inventory item can only have one booking
+  booking_date       DateTime @default(now())
+  status             String   // confirmed, cancelled, completed
+  total_amount       Float
+  down_payment       Float
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  customer           Customer  @relation(fields: [customer_id], references: [id])
+  inventory          Inventory @relation(fields: [inventory_id], references: [id])
+  payments           Payment[]
+  installments       Installment[]
+  transfers          Transfer[]
+  
+  @@map("bookings")
+}
+
+model Payment {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  booking_id         String
+  amount             Float
+  payment_date       DateTime @default(now())
+  payment_method     String   // cash, bank_transfer, cheque
+  reference_number   String?
+  status             String   // pending, completed, failed
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+
+  // Relations
+  booking            Booking  @relation(fields: [booking_id], references: [id])
+
+  @@map("payments")
+}
+
+model Installment {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  booking_id         String
+  installment_number Int
+  due_date           DateTime
+  amount             Float
+  status             String   // pending, paid, overdue
+  paid_date          DateTime?
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  booking            Booking @relation(fields: [booking_id], references: [id])
+  
+  @@map("installments")
+}
+
+model Transfer {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  booking_id         String
+  from_customer_id   String
+  to_customer_id     String
+  transfer_date      DateTime @default(now())
+  transfer_fee       Float
+  status             String   // pending, approved, rejected
+  approved_by        String?
+  approved_at        DateTime?
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  
+  // Relations
+  booking            Booking  @relation(fields: [booking_id], references: [id])
+  from_customer      Customer @relation(name: "FromCustomer", fields: [from_customer_id], references: [id])
+  to_customer        Customer @relation(name: "ToCustomer", fields: [to_customer_id], references: [id])
+  
+  @@map("transfers")
+}
+
+model AuditLog {
+  id                 String   @id @default(cuid())
+  external_id        String?  @unique
+  table_name         String
+  record_id          String
+  action             String   // create, update, delete
+  old_values         Json?
+  new_values         Json?
+  user_id            String?
+  ip_address         String?
+  user_agent         String?
+  created_at         DateTime @default(now())
+  
+  @@map("audit_logs")
+}

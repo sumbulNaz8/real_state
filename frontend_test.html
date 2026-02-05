@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Test for Kings Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frontend Test for Kings Builder Backend</h1>
+    <p>This simulates how your frontend should connect to the backend.</p>
+
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="scitforte" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="Pass2026" required>
+        </div>
+
+        <button type="submit">Login to Backend</button>
+    </form>
+
+    <div id="result" class="result" style="display:none;"></div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('result');
+
+            // Show loading
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '<p>Sending login request to backend...</p>';
+
+            try {
+                // Create form data (same as your frontend should be doing)
+                const formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+
+                console.log('Sending login request to: http://localhost:8000/api/v1/auth/login');
+
+                // Send request to your backend
+                const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+                    method: 'POST',
+                    body: formData,
+                    // Don't set Content-Type header when using FormData
+                });
+
+                const responseData = await response.json();
+
+                console.log('Response Status:', response.status);
+                console.log('Response Data:', responseData);
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ Login Successful!</h3>
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Success:</strong> ${responseData.success}</p>
+                        <p><strong>Message:</strong> ${responseData.message}</p>
+                        <p><strong>Access Token:</strong> ${responseData.data?.access_token ? 'Received' : 'Not received'}</p>
+                        <p><strong>User Role:</strong> ${responseData.data?.user?.role}</p>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `
+                        <h3>❌ Login Failed</h3>
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Error:</strong> ${responseData.error || 'Unknown error'}</p>
+                        <p><strong>Message:</strong> ${responseData.message || 'No message'}</p>
+                        <p><strong>Response:</strong> <pre>${JSON.stringify(responseData, null, 2)}</pre></p>
+                    `;
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Network Error</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p>This could be due to CORS policy, network issues, or the server being unreachable.</p>
+                    <p>Check browser console for more details.</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

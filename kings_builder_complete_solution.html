@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kings Builder - Complete Working Solution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        button.secondary {
+            background-color: #6c757d;
+        }
+        button.secondary:hover {
+            background-color: #545b62;
+        }
+        button.success {
+            background-color: #28a745;
+        }
+        button.success:hover {
+            background-color: #218838;
+        }
+        button.danger {
+            background-color: #dc3545;
+        }
+        button.danger:hover {
+            background-color: #c82333;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .hidden {
+            display: none;
+        }
+        .status-bar {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .auth-status {
+            font-weight: bold;
+        }
+        .auth-status.authenticated {
+            color: #28a745;
+        }
+        .auth-status.unauthenticated {
+            color: #dc3545;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #495057;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #e9ecef;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .nav-tab.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 Kings Builder - Complete Working Solution</h1>
+
+        <div class="status-bar">
+            <span class="auth-status unauthenticated" id="authStatus">Not Logged In</span>
+            <button id="logoutBtn" class="secondary" style="display:none;">Logout</button>
+        </div>
+
+        <!-- Login Section -->
+        <div class="section" id="loginSection">
+            <h2>🔐 Login to System</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" value="scitforte" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" value="Pass2026" required>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <div id="loginResult" class="result hidden"></div>
+        </div>
+
+        <!-- Main Content (Hidden until logged in) -->
+        <div id="mainContent" class="hidden">
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-tab="dashboard">Dashboard</div>
+                <div class="nav-tab" data-tab="projects">Projects</div>
+                <div class="nav-tab" data-tab="users">Users</div>
+                <div class="nav-tab" data-tab="builders">Builders</div>
+                <div class="nav-tab" data-tab="inventory">Inventory</div>
+                <div class="nav-tab" data-tab="reports">Reports</div>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboardTab">
+                <div class="section">
+                    <h2>📊 Dashboard</h2>
+                    <p>Welcome to Kings Builder Dashboard! You are now logged in and can access all features.</p>
+                    <p>All API endpoints are now available with proper authentication.</p>
+                </div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div class="tab-content" id="projectsTab">
+                <div class="section">
+                    <h2>🏗️ Projects Management</h2>
+
+                    <div class="form-group">
+                        <label for="projectName">Project Name:</label>
+                        <input type="text" id="projectName" placeholder="Enter project name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDescription">Description:</label>
+                        <textarea id="projectDescription" placeholder="Enter project description"></textarea>
+                    </div>
+
+                    <button id="createProjectBtn">Create New Project</button>
+                    <button id="getProjectsBtn">Load All Projects</button>
+
+                    <div id="projectsResult" class="result hidden"></div>
+
+                    <div id="projectsTableContainer">
+                        <table id="projectsTable" class="hidden">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projectsTableBody">
+                                <!-- Projects will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="tab-content" id="usersTab">
+                <div class="section">
+                    <h2>👥 Users Management</h2>
+
+                    <button id="getUsersBtn">Load All Users</button>
+
+                    <div id="usersResult" class="result hidden"></div>
+
+                    <div id="usersTableContainer">
+                        <table id="usersTable" class="hidden">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Users will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Builders Tab -->
+            <div class="tab-content" id="buildersTab">
+                <div class="section">
+                    <h2>🏢 Builders Management</h2>
+
+                    <div class="form-group">
+                        <label for="builderName">Builder Name:</label>
+                        <input type="text" id="builderName" placeholder="Enter builder name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="builderContact">Contact Person:</label>
+                        <input type="text" id="builderContact" placeholder="Enter contact person">
+                    </div>
+
+                    <button id="createBuilderBtn">Create New Builder</button>
+                    <button id="getBuildersBtn">Load All Builders</button>
+
+                    <div id="buildersResult" class="result hidden"></div>
+
+                    <div id="buildersTableContainer">
+                        <table id="buildersTable" class="hidden">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Contact Person</th>
+                                    <th>Contact Email</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="buildersTableBody">
+                                <!-- Builders will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Tab -->
+            <div class="tab-content" id="inventoryTab">
+                <div class="section">
+                    <h2>📦 Inventory Management</h2>
+
+                    <button id="getInventoryBtn">Load All Inventory</button>
+
+                    <div id="inventoryResult" class="result hidden"></div>
+
+                    <div id="inventoryTableContainer">
+                        <table id="inventoryTable" class="hidden">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Unit</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody">
+                                <!-- Inventory will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div class="tab-content" id="reportsTab">
+                <div class="section">
+                    <h2>📈 Reports</h2>
+
+                    <button id="getSalesSummaryBtn">Sales Summary</button>
+                    <button id="getInventoryStatusBtn">Inventory Status</button>
+                    <button id="getCustomerLedgerBtn">Customer Ledger</button>
+                    <button id="getPaymentCollectionBtn">Payment Collection</button>
+
+                    <div id="reportsResult" class="result hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Include the KingsBuilderAPI class here
+        class KingsBuilderAPI {
+            constructor() {
+                this.accessToken = null;
+                this.refreshToken = null;
+                this.baseURL = 'http://localhost:8000';
+
+                // Load tokens from localStorage if they exist
+                this.loadTokens();
+            }
+
+            /**
+             * Save tokens to localStorage
+             */
+            saveTokens(accessToken, refreshToken) {
+                this.accessToken = accessToken;
+                this.refreshToken = refreshToken;
+
+                localStorage.setItem('kings_builder_access_token', accessToken);
+                localStorage.setItem('kings_builder_refresh_token', refreshToken);
+            }
+
+            /**
+             * Load tokens from localStorage
+             */
+            loadTokens() {
+                this.accessToken = localStorage.getItem('kings_builder_access_token');
+                this.refreshToken = localStorage.getItem('kings_builder_refresh_token');
+            }
+
+            /**
+             * Clear tokens
+             */
+            clearTokens() {
+                this.accessToken = null;
+                this.refreshToken = null;
+
+                localStorage.removeItem('kings_builder_access_token');
+                localStorage.removeItem('kings_builder_refresh_token');
+            }
+
+            /**
+             * Check if user is authenticated
+             */
+            isAuthenticated() {
+                return !!this.accessToken;
+            }
+
+            /**
+             * Login function
+             */
+            async login(username, password) {
+                try {
+                    const formData = new FormData();
+                    formData.append('username', username);
+                    formData.append('password', password);
+
+                    const response = await fetch(`${this.baseURL}/api/v1/auth/login`, {
+                        method: 'POST',
+                        body: formData,
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        // Save tokens
+                        this.saveTokens(data.data.access_token, data.data.refresh_token);
+
+                        // Return user data
+                        return {
+                            success: true,
+                            user: data.data.user,
+                            message: data.message
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            error: data.error,
+                            message: data.message
+                        };
+                    }
+                } catch (error) {
+                    return {
+                        success: false,
+                        error: error.message,
+                        message: 'Network error occurred'
+                    };
+                }
+            }
+
+            /**
+             * Logout function
+             */
+            async logout() {
+                this.clearTokens();
+                // Optionally notify backend to invalidate tokens
+            }
+
+            /**
+             * Make authenticated API request
+             */
+            async makeAuthenticatedRequest(endpoint, options = {}) {
+                if (!this.isAuthenticated()) {
+                    throw new Error('Not authenticated. Please login first.');
+                }
+
+                const authOptions = {
+                    ...options,
+                    headers: {
+                        'Authorization': `Bearer ${this.accessToken}`,
+                        ...options.headers
+                    }
+                };
+
+                let response = await fetch(`${this.baseURL}${endpoint}`, authOptions);
+
+                // If we get a 401, try to refresh the token
+                if (response.status === 401) {
+                    const refreshSuccess = await this.refreshAccessToken();
+                    if (refreshSuccess) {
+                        // Retry the original request with new token
+                        authOptions.headers['Authorization'] = `Bearer ${this.accessToken}`;
+                        response = await fetch(`${this.baseURL}${endpoint}`, authOptions);
+                    } else {
+                        // If refresh failed, logout user
+                        this.logout();
+                        throw new Error('Session expired. Please login again.');
+                    }
+                }
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `HTTP ${response.status} error`);
+                }
+
+                return await response.json();
+            }
+
+            /**
+             * Refresh access token using refresh token
+             */
+            async refreshAccessToken() {
+                if (!this.refreshToken) {
+                    return false;
+                }
+
+                try {
+                    const response = await fetch(`${this.baseURL}/api/v1/auth/refresh`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${this.refreshToken}`
+                        }
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.success) {
+                            this.accessToken = data.data.access_token;
+                            localStorage.setItem('kings_builder_access_token', data.data.access_token);
+                            return true;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Token refresh failed:', error);
+                }
+
+                return false;
+            }
+
+            // API methods for different entities
+
+            // Projects
+            async getProjects() {
+                return await this.makeAuthenticatedRequest('/api/v1/projects/');
+            }
+
+            async createProject(projectData) {
+                return await this.makeAuthenticatedRequest('/api/v1/projects/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(projectData)
+                });
+            }
+
+            async updateProject(projectId, projectData) {
+                return await this.makeAuthenticatedRequest(`/api/v1/projects/${projectId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(projectData)
+                });
+            }
+
+            async deleteProject(projectId) {
+                return await this.makeAuthenticatedRequest(`/api/v1/projects/${projectId}`, {
+                    method: 'DELETE'
+                });
+            }
+
+            // Users
+            async getUsers() {
+                return await this.makeAuthenticatedRequest('/api/v1/users/');
+            }
+
+            async getUser(userId) {
+                return await this.makeAuthenticatedRequest(`/api/v1/users/${userId}`);
+            }
+
+            // Builders
+            async getBuilders() {
+                return await this.makeAuthenticatedRequest('/api/v1/builders/');
+            }
+
+            async createBuilder(builderData) {
+                return await this.makeAuthenticatedRequest('/api/v1/builders/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(builderData)
+                });
+            }
+
+            // Inventory
+            async getInventory() {
+                return await this.makeAuthenticatedRequest('/api/v1/inventory/');
+            }
+
+            // Investors
+            async getInvestors() {
+                return await this.makeAuthenticatedRequest('/api/v1/investors/');
+            }
+
+            // Bookings
+            async getBookings() {
+                return await this.makeAuthenticatedRequest('/api/v1/bookings/');
+            }
+
+            // Customers
+            async getCustomers() {
+                return await this.makeAuthenticatedRequest('/api/v1/customers/');
+            }
+
+            // Payments
+            async getPayments() {
+                return await this.makeAuthenticatedRequest('/api/v1/payments/');
+            }
+
+            // Installments
+            async getInstallments() {
+                return await this.makeAuthenticatedRequest('/api/v1/installments/');
+            }
+
+            // Transfers
+            async getTransfers() {
+                return await this.makeAuthenticatedRequest('/api/v1/transfers/');
+            }
+        }
+
+        // Initialize the API
+        const api = new KingsBuilderAPI();
+
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const loginResult = document.getElementById('loginResult');
+        const loginSection = document.getElementById('loginSection');
+        const mainContent = document.getElementById('mainContent');
+        const authStatus = document.getElementById('authStatus');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Tab navigation
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Project elements
+        const createProjectBtn = document.getElementById('createProjectBtn');
+        const getProjectsBtn = document.getElementById('getProjectsBtn');
+        const projectsResult = document.getElementById('projectsResult');
+        const projectsTable = document.getElementById('projectsTable');
+        const projectsTableBody = document.getElementById('projectsTableBody');
+
+        // User elements
+        const getUsersBtn = document.getElementById('getUsersBtn');
+        const usersResult = document.getElementById('usersResult');
+        const usersTable = document.getElementById('usersTable');
+        const usersTableBody = document.getElementById('usersTableBody');
+
+        // Builder elements
+        const createBuilderBtn = document.getElementById('createBuilderBtn');
+        const getBuildersBtn = document.getElementById('getBuildersBtn');
+        const buildersResult = document.getElementById('buildersResult');
+        const buildersTable = document.getElementById('buildersTable');
+        const buildersTableBody = document.getElementById('buildersTableBody');
+
+        // Inventory elements
+        const getInventoryBtn = document.getElementById('getInventoryBtn');
+        const inventoryResult = document.getElementById('inventoryResult');
+        const inventoryTable = document.getElementById('inventoryTable');
+        const inventoryTableBody = document.getElementById('inventoryTableBody');
+
+        // Report elements
+        const getSalesSummaryBtn = document.getElementById('getSalesSummaryBtn');
+        const getInventoryStatusBtn = document.getElementById('getInventoryStatusBtn');
+        const getCustomerLedgerBtn = document.getElementById('getCustomerLedgerBtn');
+        const getPaymentCollectionBtn = document.getElementById('getPaymentCollectionBtn');
+        const reportsResult = document.getElementById('reportsResult');
+
+        // Update UI based on authentication status
+        function updateUI() {
+            if (api.isAuthenticated()) {
+                loginSection.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                authStatus.textContent = 'Logged In';
+                authStatus.className = 'auth-status authenticated';
+                logoutBtn.style.display = 'inline-block';
+            } else {
+                loginSection.classList.remove('hidden');
+                mainContent.classList.add('hidden');
+                authStatus.textContent = 'Not Logged In';
+                authStatus.className = 'auth-status unauthenticated';
+                logoutBtn.style.display = 'none';
+
+                // Hide all tabs and show login
+                tabContents.forEach(tab => tab.classList.remove('active'));
+                navTabs.forEach(tab => tab.classList.remove('active'));
+                document.querySelector('[data-tab="dashboard"]').classList.add('active');
+                document.getElementById('dashboardTab').classList.add('active');
+            }
+        }
+
+        // Login form handler
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            loginResult.classList.remove('hidden');
+            loginResult.className = 'result info';
+            loginResult.innerHTML = '<p>Logging in...</p>';
+
+            try {
+                const result = await api.login(username, password);
+
+                if (result.success) {
+                    loginResult.className = 'result success';
+                    loginResult.innerHTML = `
+                        <h3>✅ Login Successful!</h3>
+                        <p><strong>Welcome:</strong> ${result.user.first_name} ${result.user.last_name}</p>
+                        <p><strong>Role:</strong> ${result.user.role}</p>
+                        <p><strong>Message:</strong> ${result.message}</p>
+                    `;
+
+                    // Clear form
+                    loginForm.reset();
+                    document.getElementById('username').value = 'scitforte';
+                    document.getElementById('password').value = 'Pass2026';
+
+                    // Update UI
+                    setTimeout(updateUI, 1000);
+                } else {
+                    loginResult.className = 'result error';
+                    loginResult.innerHTML = `
+                        <h3>❌ Login Failed</h3>
+                        <p><strong>Error:</strong> ${result.error}</p>
+                        <p><strong>Message:</strong> ${result.message}</p>
+                    `;
+                }
+            } catch (error) {
+                loginResult.className = 'result error';
+                loginResult.innerHTML = `
+                    <h3>❌ Login Error</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        });
+
+        // Logout handler
+        logoutBtn.addEventListener('click', async function() {
+            await api.logout();
+            updateUI();
+
+            // Show success message
+            loginResult.classList.remove('hidden');
+            loginResult.className = 'result success';
+            loginResult.innerHTML = '<h3>✅ Successfully logged out</h3>';
+            setTimeout(() => loginResult.classList.add('hidden'), 3000);
+        });
+
+        // Tab navigation
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+
+                // Remove active class from all tabs and contents
+                navTabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding content
+                this.classList.add('active');
+                document.getElementById(`${tabName}Tab`).classList.add('active');
+            });
+        });
+
+        // Project handlers
+        createProjectBtn.addEventListener('click', async function() {
+            const projectName = document.getElementById('projectName').value.trim();
+            const projectDescription = document.getElementById('projectDescription').value.trim();
+
+            if (!projectName) {
+                showResult(projectsResult, '<h3>❌ Please enter a project name.</h3>', true);
+                return;
+            }
+
+            projectsResult.classList.remove('hidden');
+            projectsResult.className = 'result info';
+            projectsResult.innerHTML = '<p>Creating project...</p>';
+
+            try {
+                const result = await api.createProject({
+                    name: projectName,
+                    description: projectDescription,
+                    builder_id: null,
+                    location: "Default Location",
+                    total_units: 0,
+                    status: "active"
+                });
+
+                projectsResult.className = 'result success';
+                projectsResult.innerHTML = `
+                    <h3>✅ Project created successfully!</h3>
+                    <p><strong>ID:</strong> ${result.id}</p>
+                    <p><strong>Name:</strong> ${result.name}</p>
+                    <p><strong>Description:</strong> ${result.description || 'No description'}</p>
+                `;
+
+                // Clear form
+                document.getElementById('projectName').value = '';
+                document.getElementById('projectDescription').value = '';
+
+                // Reload projects
+                await loadProjects();
+            } catch (error) {
+                projectsResult.className = 'result error';
+                projectsResult.innerHTML = `
+                    <h3>❌ Error creating project</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        });
+
+        getProjectsBtn.addEventListener('click', async function() {
+            await loadProjects();
+        });
+
+        async function loadProjects() {
+            projectsResult.classList.remove('hidden');
+            projectsResult.className = 'result info';
+            projectsResult.innerHTML = '<p>Loading projects...</p>';
+
+            try {
+                const projects = await api.getProjects();
+
+                projectsResult.className = 'result success';
+                projectsResult.innerHTML = `<h3>✅ Loaded ${projects.length} projects</h3>`;
+
+                // Populate table
+                projectsTableBody.innerHTML = '';
+                projects.forEach(project => {
+                    const row = projectsTableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${project.id}</td>
+                        <td>${project.name}</td>
+                        <td>${project.description || 'No description'}</td>
+                        <td>${project.status}</td>
+                        <td>
+                            <button class="secondary" onclick="alert('Edit project functionality would go here')">Edit</button>
+                            <button class="danger" onclick="confirmDeleteProject('${project.id}', '${project.name}')">Delete</button>
+                        </td>
+                    `;
+                });
+
+                projectsTable.classList.remove('hidden');
+            } catch (error) {
+                projectsResult.className = 'result error';
+                projectsResult.innerHTML = `
+                    <h3>❌ Error loading projects</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+                projectsTable.classList.add('hidden');
+            }
+        }
+
+        // Users handlers
+        getUsersBtn.addEventListener('click', async function() {
+            usersResult.classList.remove('hidden');
+            usersResult.className = 'result info';
+            usersResult.innerHTML = '<p>Loading users...</p>';
+
+            try {
+                const users = await api.getUsers();
+
+                usersResult.className = 'result success';
+                usersResult.innerHTML = `<h3>✅ Loaded ${users.length} users</h3>`;
+
+                // Populate table
+                usersTableBody.innerHTML = '';
+                users.forEach(user => {
+                    const row = usersTableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.role}</td>
+                        <td>${user.status}</td>
+                    `;
+                });
+
+                usersTable.classList.remove('hidden');
+            } catch (error) {
+                usersResult.className = 'result error';
+                usersResult.innerHTML = `
+                    <h3>❌ Error loading users</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+                usersTable.classList.add('hidden');
+            }
+        });
+
+        // Builders handlers
+        createBuilderBtn.addEventListener('click', async function() {
+            const builderName = document.getElementById('builderName').value.trim();
+            const builderContact = document.getElementById('builderContact').value.trim();
+
+            if (!builderName) {
+                showResult(buildersResult, '<h3>❌ Please enter a builder name.</h3>', true);
+                return;
+            }
+
+            buildersResult.classList.remove('hidden');
+            buildersResult.className = 'result info';
+            buildersResult.innerHTML = '<p>Creating builder...</p>';
+
+            try {
+                const result = await api.createBuilder({
+                    name: builderName,
+                    contact_person: builderContact,
+                    contact_email: `${builderName.toLowerCase().replace(/\s+/g, '')}@example.com`,
+                    status: "active"
+                });
+
+                buildersResult.className = 'result success';
+                buildersResult.innerHTML = `
+                    <h3>✅ Builder created successfully!</h3>
+                    <p><strong>ID:</strong> ${result.id}</p>
+                    <p><strong>Name:</strong> ${result.name}</p>
+                    <p><strong>Contact:</strong> ${result.contact_person || 'Not specified'}</p>
+                `;
+
+                // Clear form
+                document.getElementById('builderName').value = '';
+                document.getElementById('builderContact').value = '';
+
+                // Reload builders
+                await loadBuilders();
+            } catch (error) {
+                buildersResult.className = 'result error';
+                buildersResult.innerHTML = `
+                    <h3>❌ Error creating builder</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        });
+
+        getBuildersBtn.addEventListener('click', async function() {
+            await loadBuilders();
+        });
+
+        async function loadBuilders() {
+            buildersResult.classList.remove('hidden');
+            buildersResult.className = 'result info';
+            buildersResult.innerHTML = '<p>Loading builders...</p>';
+
+            try {
+                const builders = await api.getBuilders();
+
+                buildersResult.className = 'result success';
+                buildersResult.innerHTML = `<h3>✅ Loaded ${builders.length} builders</h3>`;
+
+                // Populate table
+                buildersTableBody.innerHTML = '';
+                builders.forEach(builder => {
+                    const row = buildersTableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${builder.id}</td>
+                        <td>${builder.name}</td>
+                        <td>${builder.contact_person || 'Not specified'}</td>
+                        <td>${builder.contact_email || 'Not specified'}</td>
+                        <td>${builder.status}</td>
+                    `;
+                });
+
+                buildersTable.classList.remove('hidden');
+            } catch (error) {
+                buildersResult.className = 'result error';
+                buildersResult.innerHTML = `
+                    <h3>❌ Error loading builders</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+                buildersTable.classList.add('hidden');
+            }
+        }
+
+        // Inventory handlers
+        getInventoryBtn.addEventListener('click', async function() {
+            inventoryResult.classList.remove('hidden');
+            inventoryResult.className = 'result info';
+            inventoryResult.innerHTML = '<p>Loading inventory...</p>';
+
+            try {
+                const inventory = await api.getInventory();
+
+                inventoryResult.className = 'result success';
+                inventoryResult.innerHTML = `<h3>✅ Loaded ${inventory.length} inventory items</h3>`;
+
+                // Populate table
+                inventoryTableBody.innerHTML = '';
+                inventory.forEach(item => {
+                    const row = inventoryTableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.type || 'N/A'}</td>
+                        <td>${item.unit || 'N/A'}</td>
+                        <td>${item.price ? 'Rs. ' + item.price : 'N/A'}</td>
+                        <td>${item.status}</td>
+                    `;
+                });
+
+                inventoryTable.classList.remove('hidden');
+            } catch (error) {
+                inventoryResult.className = 'result error';
+                inventoryResult.innerHTML = `
+                    <h3>❌ Error loading inventory</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+                inventoryTable.classList.add('hidden');
+            }
+        });
+
+        // Report handlers
+        getSalesSummaryBtn.addEventListener('click', async function() {
+            reportsResult.classList.remove('hidden');
+            reportsResult.className = 'result info';
+            reportsResult.innerHTML = '<p>Loading sales summary...</p>';
+
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/reports/sales-summary', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${api.accessToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    reportsResult.className = 'result success';
+                    reportsResult.innerHTML = `
+                        <h3>✅ Sales Summary Report</h3>
+                        <p><strong>Total Sales:</strong> Rs. ${data.total_sales || 0}</p>
+                        <p><strong>Total Transactions:</strong> ${data.total_transactions || 0}</p>
+                        <p><strong>Report Date:</strong> ${data.report_date || new Date().toISOString()}</p>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Failed to load report');
+                }
+            } catch (error) {
+                reportsResult.className = 'result error';
+                reportsResult.innerHTML = `
+                    <h3>❌ Error loading sales summary</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        });
+
+        getInventoryStatusBtn.addEventListener('click', async function() {
+            reportsResult.classList.remove('hidden');
+            reportsResult.className = 'result info';
+            reportsResult.innerHTML = '<p>Loading inventory status...</p>';
+
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/reports/inventory-status', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${api.accessToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    reportsResult.className = 'result success';
+                    reportsResult.innerHTML = `
+                        <h3>✅ Inventory Status Report</h3>
+                        <p><strong>Total Items:</strong> ${data.total_items || 0}</p>
+                        <p><strong>Available Items:</strong> ${data.available_items || 0}</p>
+                        <p><strong>Reserved Items:</strong> ${data.reserved_items || 0}</p>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Failed to load report');
+                }
+            } catch (error) {
+                reportsResult.className = 'result error';
+                reportsResult.innerHTML = `
+                    <h3>❌ Error loading inventory status</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        });
+
+        getCustomerLedgerBtn.addEventListener('click', async function() {
+            reportsResult.classList.remove('hidden');
+            reportsResult.className = 'result info';
+            reportsResult.innerHTML = '<p>Loading customer ledger...</p>';
+
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/reports/customer-ledger', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${api.accessToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    reportsResult.className = 'result success';
+                    reportsResult.innerHTML = `
+                        <h3>✅ Customer Ledger Report</h3>
+                        <p><strong>Total Customers:</strong> ${data.total_customers || 0}</p>
+                        <p><strong>Total Outstanding:</strong> Rs. ${data.total_outstanding || 0}</p>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Failed to load report');
+                }
+            } catch (error) {
+                reportsResult.className = 'result error';
+                reportsResult.innerHTML = `
+                    <h3>❌ Error loading customer ledger</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        });
+
+        getPaymentCollectionBtn.addEventListener('click', async function() {
+            reportsResult.classList.remove('hidden');
+            reportsResult.className = 'result info';
+            reportsResult.innerHTML = '<p>Loading payment collection...</p>';
+
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/reports/payment-collection', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${api.accessToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    reportsResult.className = 'result success';
+                    reportsResult.innerHTML = `
+                        <h3>✅ Payment Collection Report</h3>
+                        <p><strong>Total Collected:</strong> Rs. ${data.total_collected || 0}</p>
+                        <p><strong>Collection Rate:</strong> ${(data.collection_rate * 100 || 0).toFixed(2)}%</p>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Failed to load report');
+                }
+            } catch (error) {
+                reportsResult.className = 'result error';
+                reportsResult.innerHTML = `
+                    <h3>❌ Error loading payment collection</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        });
+
+        // Helper function to show result
+        function showResult(element, message, isError = false) {
+            element.classList.remove('hidden');
+            element.className = isError ? 'result error' : 'result success';
+            element.innerHTML = message;
+        }
+
+        // Helper function for deleting project (stub)
+        window.confirmDeleteProject = function(projectId, projectName) {
+            if (confirm(`Are you sure you want to delete project "${projectName}"?`)) {
+                alert(`Delete functionality would go here for project ID: ${projectId}`);
+            }
+        };
+
+        // Initialize the UI
+        updateUI();
+    </script>
+</body>
+</html>

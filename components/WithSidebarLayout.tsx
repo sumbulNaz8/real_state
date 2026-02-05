@@ -5,11 +5,11 @@ import Sidebar from '@/components/Sidebar';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { Menu, X } from 'lucide-react';
 
-export default function DashboardLayout({
-  children,
-}: {
+interface WithSidebarLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function WithSidebarLayout({ children }: WithSidebarLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (

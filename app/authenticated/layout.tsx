@@ -14,13 +14,13 @@ export default function AuthenticatedLayout({
 
   return (
     <ProtectedRoute>
-      <div className="flex">
-        <div className={`${sidebarOpen ? 'w-64' : 'w-0 md:w-16'} transition-all duration-300 ease-in-out overflow-hidden z-10`}>
+      <div className="flex min-h-screen">
+        <div className={`${sidebarOpen ? 'w-64' : 'w-0 md:w-16'} transition-all duration-300 ease-in-out overflow-hidden z-10 flex-shrink-0`}>
           <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
         </div>
-        <main className={`flex-1 p-0 transition-all duration-300 ease-in-out ml-0`}>
+        <main className={`flex-1 transition-all duration-300 ease-in-out ${sidebarOpen ? 'ml-0' : 'ml-0'} min-h-screen`}>
           {/* Mobile menu button */}
-          <div className="md:hidden mb-4">
+          <div className="md:hidden p-4 border-b">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
               className="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
@@ -28,7 +28,9 @@ export default function AuthenticatedLayout({
               {sidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
-          {children}
+          <div className="p-6">
+            {children}
+          </div>
         </main>
       </div>
     </ProtectedRoute>
